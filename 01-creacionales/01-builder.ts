@@ -13,6 +13,8 @@
  * https://refactoring.guru/es/design-patterns/builder
  */
 
+import { COLORS } from "../helpers/colors.ts";
+
 class Computer {
   public cpu: string = 'cpu - not defined';
   public ram: string = 'ram - not defined';
@@ -24,7 +26,7 @@ class Computer {
       CPU: ${this.cpu}  
       RAM: ${this.ram}  
       Almacenamiento: ${this.storage}  
-      GPU: ${this.gpu}  
+      GPU: ${this.gpu ?? 'No tiene GPU'}  
     `)
   }
 }
@@ -65,3 +67,30 @@ class ComputerBuilder {
     return this.computer;
   }
 }
+
+function main() {
+  const basicComputer: Computer = new ComputerBuilder()
+    .setCPU('Inter Core 2 Dúo')
+    .setRAM('4GB')
+    .setStorage('256GB')
+    /* Luego de que sepamos que creamos el objeto que deseamos llamamos
+    el método build para retornar el objeto el objeto creado:  */
+    .build();
+
+    console.log(`%cBasic computer`, COLORS.blue);
+    basicComputer.displayConfiguration();
+
+  const gamerComputer: Computer = new ComputerBuilder()
+    .setCPU('AMD')
+    .setRAM('1000GB')
+    .setStorage('3TB')
+    .setGPU('Nvidia RTX 4070')
+    /* Luego de que sepamos que creamos el objeto que deseamos llamamos
+    el método build para retornar el objeto el objeto creado:  */
+    .build();
+
+  console.log(`%Gamer computer`, COLORS.blue);
+    gamerComputer.displayConfiguration();
+}
+
+main();
