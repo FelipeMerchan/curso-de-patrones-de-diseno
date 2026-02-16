@@ -41,7 +41,7 @@ class BeanHamburger implements Hamburger {
 es decir, no podamos hacer un new Restaurant(), la clase abstracta solo sirve para
 definir el esqueleto de otras clases, es como el contrato que las clases que la usen deban cumplir: */
 abstract class Restaurant {
-  abstract createHamgurger(): Hamburger;
+  protected abstract createHamgurger(): Hamburger;
 
   orderHamburger(): void {
     const hamgurger = this.createHamgurger();
