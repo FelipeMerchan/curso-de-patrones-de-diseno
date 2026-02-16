@@ -12,3 +12,45 @@
  * https://refactoring.guru/es/design-patterns/factory-method
  *
  */
+
+import { COLORS } from "../helpers/colors.ts";
+
+interface Hamburger {
+  prepare(): void;
+}
+
+class ChickenHamburger implements Hamburger {
+  prepare(): void {
+    console.log('Preparando una hamburgesa de %cpollo', COLORS.yellow);
+  }
+}
+
+class BeefHamburger implements Hamburger {
+  prepare(): void {
+    console.log('Preparando una hamburgesa de %cres', COLORS.brown);
+  }
+}
+
+/* abstract class la usamos para no permitir que se creen instancias de la clase,
+es decir, no podamos hacer un new Restaurant(), la clase abstracta solo sirve para
+definir el esqueleto de otras clases, es como el contrato que las clases que la usen deban cumplir: */
+abstract class Restaurant {
+  abstract createHamgurger(): Hamburger;
+
+  orderHamburger(): void {
+    const hamgurger = this.createHamgurger();
+    hamgurger.prepare();
+  }
+}
+
+class ChickenRestaurant extends Restaurant {
+  override createHamgurger(): Hamburger {
+    return new ChickenHamburger();
+  }
+}
+
+class BeefRestaurant extends Restaurant {
+  override createHamgurger(): Hamburger {
+    return new BeefHamburger();
+  }
+}
