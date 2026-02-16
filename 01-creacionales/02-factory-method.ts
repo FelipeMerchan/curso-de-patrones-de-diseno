@@ -31,6 +31,12 @@ class BeefHamburger implements Hamburger {
   }
 }
 
+class BeanHamburger implements Hamburger {
+  prepare(): void {
+    console.log('Preparando una hamburgesa de %cfrijol', COLORS.orange);
+  }
+}
+
 /* abstract class la usamos para no permitir que se creen instancias de la clase,
 es decir, no podamos hacer un new Restaurant(), la clase abstracta solo sirve para
 definir el esqueleto de otras clases, es como el contrato que las clases que la usen deban cumplir: */
@@ -54,3 +60,36 @@ class BeefRestaurant extends Restaurant {
     return new BeefHamburger();
   }
 }
+
+class BeanRestaurant extends Restaurant {
+  override createHamgurger(): Hamburger {
+    return new BeanHamburger();
+  }
+}
+
+function main() {
+  let restaurant: Restaurant;
+
+  const burgerType = prompt('¿Qué tipo de hamburgesa quieres? (chicken/beef/bean)');
+
+  switch (burgerType) {
+    case 'chicken':
+      /* No estamos mandando llamar la creación de la hamburguesa aquí cuando
+      usamos las fábricas (por ejemplo, ChickenRestaurant):*/
+      restaurant = new ChickenRestaurant();
+      break;
+    case 'beef':
+      restaurant = new BeefRestaurant();
+      break;
+    case 'bean':
+      restaurant = new BeanRestaurant();
+      break;
+  
+    default:
+      throw new Error('Opción no válida');
+  }
+
+  restaurant.orderHamburger();
+}
+
+main();
