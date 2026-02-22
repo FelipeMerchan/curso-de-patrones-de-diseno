@@ -74,7 +74,7 @@ function main() {
     .setRAM('4GB')
     .setStorage('256GB')
     /* Luego de que sepamos que creamos el objeto que deseamos llamamos
-    el método build para retornar el objeto el objeto creado:  */
+    el método build para retornar el objeto creado: */
     .build();
 
     console.log(`%cBasic computer`, COLORS.blue);
@@ -86,7 +86,7 @@ function main() {
     .setStorage('3TB')
     .setGPU('Nvidia RTX 4070')
     /* Luego de que sepamos que creamos el objeto que deseamos llamamos
-    el método build para retornar el objeto el objeto creado:  */
+    el método build para retornar el objeto creado: */
     .build();
 
   console.log(`%Gamer computer`, COLORS.blue);
